@@ -1,28 +1,20 @@
-import HeaderClient from '../../../components/HeaderClient';
 import ProductDetailsCard from '../../../components/ProductDetailsCard';
-import { ProductDTO } from '../../../models/product';
 import './styles.css';
+import * as productService from '../../../services/product-service';
+import { useParams } from 'react-router-dom';
 
-const product: ProductDTO = {
-  id: 2,
-  name: "Smart TV",
-  description: "Televisor de alta definição",
-  imgUrl: "https://raw.githubusercontent.com/devsuperior/dscatalog-resources/master/backend/img/2-big.jpg",
-  price: 2500.99,
-  categories: [
-    {
-      id: 1,
-      name: "Computadores"
-    },
-    {
-      id: 2,
-      name: "Eletrônicos"
-    }
-  ]
-}
+
+
 
 export default function ProductDetails() {
+  const params = useParams();
+  const product = productService.findById(Number(params.productId)); 
+ 
   return (
-    <ProductDetailsCard product={product}/>
+    <>
+    {
+       product &&  <ProductDetailsCard product={product}/>
+    }
+    </>
   )
 }

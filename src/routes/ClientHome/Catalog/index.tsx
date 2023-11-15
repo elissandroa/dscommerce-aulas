@@ -1,29 +1,27 @@
-import CatalogCard from '../../../components/CatalogCard';
-import { ProductDTO } from '../../../models/product';
 import './styles.css';
+import * as productService from '../../../services/product-service';
+import SearchBar from '../../../components/SearchBar';
+import ButtonNextPage from '../../../components/ButtonNextPage';
+import ProductCard from '../../../components/ProductCard';
 
 export default function Catalog() {
-  const product: ProductDTO = {
-    id: 2,
-    name: "Smart TV",
-    description: "Televisor de alta definição",
-    imgUrl: "https://raw.githubusercontent.com/devsuperior/dscatalog-resources/master/backend/img/2-big.jpg",
-    price: 5000.00,
-    categories: [
-      {
-        id: 1,
-        name: "Computadores"
-      },
-      {
-        id: 2,
-        name: "Eletrônicos"
-      }
-    ]
-  }
-  
+
   return (
     <>
-       <CatalogCard product={product} />
+      <main>
+        <section id="dsc-catalog-section" className="dsc-container">
+          <SearchBar />
+          <div className="dsc-catalog-cards dsc-mb20 dsc-mt20">
+            {
+              productService.findAll().map(product => (
+
+                <ProductCard key={product.id} product={product} />
+              ))
+            }
+          </div>
+          <ButtonNextPage />
+        </section>
+      </main>
     </>
   )
 }
