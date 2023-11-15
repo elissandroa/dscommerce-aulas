@@ -1,6 +1,6 @@
-import HeaderClient from '../../components/HeaderClient';
-import ProductDetailsCard from '../../components/ProductDetailsCard';
-import { ProductDTO } from '../../models/product';
+import HeaderClient from '../../../components/HeaderClient';
+import ProductDetailsCard from '../../../components/ProductDetailsCard';
+import { ProductDTO } from '../../../models/product';
 import './styles.css';
 
 const product: ProductDTO = {
@@ -23,9 +23,6 @@ const product: ProductDTO = {
 
 export default function ProductDetails() {
   return (
-    <>
-    <HeaderClient />
     <ProductDetailsCard product={product}/>
-    </>
   )
 }
