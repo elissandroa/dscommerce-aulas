@@ -2,7 +2,7 @@ import { Navigate, Route, BrowserRouter as Router, Routes } from "react-router-d
 import ProductDetails from "./routes/ClientHome/ProductDetails";
 import Catalog from "./routes/ClientHome/Catalog";
 import ClientHome from "./routes/ClientHome";
-import NotFound from "./routes/NotFound";
+import Cart from "./routes/ClientHome/Cart";
 
 export default function App() {
   return (
@@ -12,8 +12,9 @@ export default function App() {
           <Route index element={<Catalog />} />
           <Route path="/catalog" element={<Catalog />} />
           <Route path='/product-details/:productId' element={<ProductDetails />} />
+          <Route path="/cart" element={<Cart />} />
         </Route>
-        <Route path="*" element={<Navigate to={'/'}/>} />
+        <Route path="*" element={<Navigate to={'/'} />} />
       </Routes>
     </Router>
   )

@@ -3,7 +3,7 @@ import ButtonInverse from "../ButtonInverse";
 import ButtonPrimary from "../ButtonPrimary";
 import ProductCategory from '../ProductCategory';
 import { ProductDTO } from '../../models/product';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 type Props = {
   product: ProductDTO;
@@ -35,7 +35,9 @@ export default function ProductDetailsCard({ product }: Props) {
           </div>
         </div>
         <div className="dsc-btn-page-container">
+          <NavLink to={'/cart'}>
           <ButtonPrimary text='Comprar' />
+          </NavLink>
           <Link to={'/'}>
             <ButtonInverse text='Início' />
           </Link>
