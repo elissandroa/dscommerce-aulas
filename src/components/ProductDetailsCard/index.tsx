@@ -3,7 +3,8 @@ import ButtonInverse from "../ButtonInverse";
 import ButtonPrimary from "../ButtonPrimary";
 import ProductCategory from '../ProductCategory';
 import { ProductDTO } from '../../models/product';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import * as cartService from '../../services/cart-service';
 
 type Props = {
   product: ProductDTO;
@@ -11,6 +12,12 @@ type Props = {
 
 
 export default function ProductDetailsCard({ product }: Props) {
+const navigate = useNavigate();
+
+  function handleBuyClick (){
+    cartService.addProduct(product);
+    navigate('/cart');
+  }
 
   return (
     <main>
@@ -35,9 +42,9 @@ export default function ProductDetailsCard({ product }: Props) {
           </div>
         </div>
         <div className="dsc-btn-page-container">
-          <NavLink to={'/cart'}>
-          <ButtonPrimary text='Comprar' />
-          </NavLink>
+          <div onClick={handleBuyClick} >
+            <ButtonPrimary text='Comprar' />
+          </div>
           <Link to={'/'}>
             <ButtonInverse text='Início' />
           </Link>
