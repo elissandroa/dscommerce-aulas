@@ -5,6 +5,8 @@ import ProductCategory from '../ProductCategory';
 import { ProductDTO } from '../../models/product';
 import { Link, useNavigate } from 'react-router-dom';
 import * as cartService from '../../services/cart-service';
+import { useContext } from 'react';
+import { ContextCartCount } from '../../utils/context-cart';
 
 type Props = {
   product: ProductDTO;
@@ -12,11 +14,16 @@ type Props = {
 
 
 export default function ProductDetailsCard({ product }: Props) {
-const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  function handleBuyClick (){
-    cartService.addProduct(product);
-    navigate('/cart');
+  const { setContextCartCount } = useContext(ContextCartCount);
+
+  function handleBuyClick() {
+    if (product) {
+      cartService.addProduct(product);
+      setContextCartCount(cartService.getCart().items.length);
+      navigate('/cart');
+    }
   }
 
   return (

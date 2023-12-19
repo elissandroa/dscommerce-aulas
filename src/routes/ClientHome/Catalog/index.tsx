@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import './styles.css';
 import * as productService from '../../../services/product-service';
 import SearchBar from '../../../components/SearchBar';
