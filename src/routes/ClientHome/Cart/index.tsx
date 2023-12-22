@@ -69,9 +69,9 @@ export default function Cart() {
                         Finalizar pedido
                     </div>
                     <Link to={'/catalog'}>
-                    <div className="dsc-btn dsc-btn-white">
-                        Continuar comprando
-                    </div>
+                        <div className="dsc-btn dsc-btn-white">
+                            Continuar comprando
+                        </div>
                     </Link>
                 </div>
             </section>
