@@ -1,6 +1,5 @@
 import './styles.css';
 import { useState } from 'react';
-import { loginRequest } from '../../../services/auth-service';
 import { CredentialsDTO } from '../../../models/auth';
 import * as authService from '../../../services/auth-service';
 
