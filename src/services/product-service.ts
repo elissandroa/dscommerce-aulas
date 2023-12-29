@@ -1,5 +1,4 @@
-import axios, { AxiosRequestConfig } from 'axios';
-import { BASE_URL } from '../utils/system';
+import { AxiosRequestConfig } from 'axios';
 import { requestBackend } from '../utils/requests';
 
 
