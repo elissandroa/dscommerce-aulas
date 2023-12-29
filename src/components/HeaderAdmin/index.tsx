@@ -12,7 +12,6 @@ export default function HeaderAdmin() {
       userService.findMe()
       .then(response => {
           setUser(response.data);
-          console.log(response.data);
       })
       .catch(error => {
           console.log('Error', error);
