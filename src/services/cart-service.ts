@@ -42,3 +42,7 @@ export function decreaseItem(productId: number) {
         cartRepository.save(cart);
     }
 }
+
+export function clearCart() {
+    cartRepository.clear();
+}
