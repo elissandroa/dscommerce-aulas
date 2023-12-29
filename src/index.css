@@ -135,8 +135,6 @@ a, a:hover {
    color: unset;
 }
 
-
-
 .dsc-logged-user p {
    font-size: 12px;
    font-weight: 400;
@@ -147,6 +145,12 @@ a, a:hover {
    flex-direction: column;
    justify-content: center;
    align-items: end;
+}
+
+.dsc-logged-user span {
+   font-size: 14;
+   font-weight: 700;
+   cursor: pointer;
 }
 
 @media (min-width: 576px) {
