@@ -6,6 +6,7 @@ import * as productService from '../../../services/product-service';
 import { ProductDTO } from '../../../models/product';
 import SearchBar from '../../../components/SearchBar';
 import ButtonNextPage from '../../../components/ButtonNextPage';
+import DialogInfo from '../../../components/DialogInfo';
 
 type QueryParams = {
     page: number;
@@ -13,6 +14,11 @@ type QueryParams = {
 }
 
 export default function ProductListing() {
+
+    const [dialogInfoData, setDialogInfoData] = useState({
+        visible: false,
+        message: "Operação realizada com sucesso!"
+    });
 
     const [products, setProducts] = useState<ProductDTO[]>([]);
 
@@ -32,13 +38,20 @@ export default function ProductListing() {
             })
     }, [queryParams]);
 
-    function handleSearch(searchText: string) {
-        setProducts([]);
+    function handleSearch(searchText: string) {setProducts([]);
         setQueryParams({ ...queryParams, page: 0, name: searchText });
     }
 
     function handleNextPageClick() {
         setQueryParams({ ...queryParams, page: queryParams.page + 1 });
+    }
+
+    function handleDialogInfoClose() {
+        setDialogInfoData({ ...dialogInfoData, visible: false});
+    }
+
+    function handleDeleteClick() {
+        setDialogInfoData({ ...dialogInfoData, visible: true});
     }
 
     return (
@@ -72,7 +85,7 @@ export default function ProductListing() {
                                     <td className="dsc-tb768">R$ {prod.price.toFixed(2)}</td>
                                     <td className="dsc-txt-left">{prod.name}</td>
                                     <td><img className="dsc-product-listing-btn" src={editIcon} alt="Editar" /></td>
-                                    <td><img className="dsc-product-listing-btn" src={deleteIcon} alt="Deletar" /></td>
+                                    <td><img onClick={handleDeleteClick} className="dsc-product-listing-btn" src={deleteIcon} alt="Deletar" /></td>
                                 </tr>
                             ))
                         }
@@ -83,6 +96,10 @@ export default function ProductListing() {
                     <ButtonNextPage onSearch={handleNextPageClick} />
                 }
             </section>
+            {
+                dialogInfoData.visible &&
+                <DialogInfo message={dialogInfoData.message} onDialogClose={handleDialogInfoClose} />
+            }
         </main>
     )
 }

@@ -44,6 +44,8 @@ export default function Catalog() {
     setQueryParams({ ...queryParams, page: queryParams.page + 1 })
   }
 
+  
+
   return (
     <>
       <main>
