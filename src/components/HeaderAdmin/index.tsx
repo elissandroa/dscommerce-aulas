@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { UserDTO } from '../../models/user';
 import * as userService from '../../services/user-service';
 import LoggedUser from '../LogedUser';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 export default function HeaderAdmin() {
   const [user, setUser] = useState<UserDTO>();
@@ -23,12 +23,14 @@ export default function HeaderAdmin() {
   return (
     <header className="dsc-header-admin">
       <nav className="dsc-container">
-        <h1>DSCommerce</h1>
+        <Link to="/">
+          <h1>DSCommerce</h1>
+        </Link>
         <div className="dsc-navbar-right">
           <div className="dsc-menu-items-container">
             <NavLink
               to="/admin/home"
-              className={({isActive}) => isActive ? "dsc-menu-item-active" : ""}
+              className={({ isActive }) => isActive ? "dsc-menu-item-active" : ""}
             >
               <div className="dsc-menu-item">
                 <img src={homeIcon} alt="Início" />
@@ -37,7 +39,7 @@ export default function HeaderAdmin() {
             </NavLink>
             <NavLink
               to="/admin/products"
-              className={({isActive}) => isActive ? "dsc-menu-item-active" : ""}
+              className={({ isActive }) => isActive ? "dsc-menu-item-active" : ""}
             >
               <div className="dsc-menu-item">
                 <img src={productsIcon} alt="Cadastro de produtos" />
