@@ -1,6 +1,7 @@
 import './styles.css';
 
 export default function ProductForm() {
+    
     return (
         <main>
             <section id="product-form-section" className="dsc-container">
