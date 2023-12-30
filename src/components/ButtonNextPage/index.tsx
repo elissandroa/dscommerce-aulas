@@ -1,8 +1,13 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import './styles.css';
 
-export default function ButtonNextPage() {
+type Props = {
+  onSearch:() => any;
+}
+
+export default function ButtonNextPage({onSearch}:Props) {
   return (
-    <div className="dsc-btn-next-page">
+    <div onClick={onSearch}className="dsc-btn-next-page">
         carregar mais
       </div>
   )
