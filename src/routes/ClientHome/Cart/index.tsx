@@ -15,8 +15,7 @@ export default function Cart() {
     function handleClearClick() {
         cartService.clearCart();
         setContextCartCount(0);
-        navigate("/catalog");
-
+        setCart(cartService.getCart());
     }
 
     function handlePlaceOrderClick() {
