@@ -1,5 +1,5 @@
 import './styles.css';
-import { Link, useFetcher, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import * as forms from '../../../utils/forms';
 import FormInput from '../../../components/FormInput';
@@ -53,16 +53,13 @@ export default function ProductForm() {
     }, []);
 
     function handleInputChange(event: any) {
-        const dataUpdated = forms.update(formData, event.target.name, event.target.value);
-        const dataValidated = forms.validate(dataUpdated, event.target.name);
-        setFormData(dataValidated);
+        setFormData(forms.updateAndValidate(formData, event.target.name, event.target.value));
     }
 
     function handleTurnDirty(name: string) {
-        const newFormData = forms.toDirty(formData, name);
-        setFormData(newFormData);
+        setFormData(forms.dirtyAndValidade(formData, name));
     }
-    
+
     return (
         <main>
             <section id="product-form-section" className="dsc-container">

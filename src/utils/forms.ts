@@ -29,6 +29,16 @@ export function validate(inputs: any, name: string) {
   return { ...inputs, [name]: { ...inputs[name], invalid: isInValid.toString() } };
 }
 
-export function toDirty(inputs: any, name: string){
-  return { ...inputs, [name]: { ...inputs[name], dirty:"true"}};
+export function toDirty(inputs: any, name: string) {
+  return { ...inputs, [name]: { ...inputs[name], dirty: "true" } };
+}
+
+export function updateAndValidate(inputs: any, name: string, newValue: any){
+  const dataUpdated = update(inputs, name, newValue);
+  return validate(dataUpdated, name);
+}
+
+export function dirtyAndValidade(inputs: any, name: string){
+  const dataDirty = toDirty(inputs, name);
+  return validate(dataDirty, name);
 }
