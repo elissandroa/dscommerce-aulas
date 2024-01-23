@@ -23,6 +23,7 @@ export default function Login() {
                 return /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(value.toLowerCase());
             },
             message: "Favor informar um email válido",
+            invalid: false
         },
         password: {
             value: "",
@@ -68,8 +69,7 @@ export default function Login() {
                                     onTurnDirty={handleTurnDirty}
                                     onChange={handleInputChange}
                                 />
-
-                                <div className="dsc-form-error"></div>
+                                <div className="dsc-form-error">{formData.username.message}</div>
                             </div>
                             <div>
                                 <FormInput
@@ -79,6 +79,7 @@ export default function Login() {
                                     onChange={handleInputChange}
                                 />
                             </div>
+                            <div className="dsc-form-error">{formData.password.message}</div>
                         </div>
 
                         <div className="dsc-login-form-buttons dsc-mt20">
