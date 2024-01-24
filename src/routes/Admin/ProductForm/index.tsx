@@ -5,13 +5,18 @@ import { useEffect, useState } from 'react';
 import * as forms from '../../../utils/forms';
 import FormInput from '../../../components/FormInput';
 import * as productService from '../../../services/product-service';
+import * as categoryService from '../../../services/category-service';
 import FormTextArea from '../../../components/FormTextArea';
+import { CategoryDTO } from '../../../models/category';
+import FormSelect from '../../../components/FormSelect';
 
 export default function ProductForm() {
 
     const params = useParams();
 
     const isEditing = params.productId !== 'create';
+
+    const [categories, setCategories] = useState<CategoryDTO>();
 
     const [formData, setFormData] = useState<any>({
         name: {
@@ -20,7 +25,7 @@ export default function ProductForm() {
             name: "name",
             type: "text",
             placeholder: "Nome",
-            validation: function(value: string) {
+            validation: function (value: string) {
                 return /^.{3,80}/.test(value)
             },
             message: "Favor informar um nome de 3 a 80 caracteres"
@@ -44,19 +49,36 @@ export default function ProductForm() {
             type: "text",
             placeholder: "Imagem",
         },
-        description : {
+        description: {
             value: "",
             id: "description",
             name: "description",
             type: "text",
             placeholder: "Descrição",
-            validation: function(value: string) {
+            validation: function (value: string) {
                 return /^.{10,}/.test(value)
             },
             message: "A descrição deve ter pelo menos 10 caracteres"
+        },
+        categories: {
+            value: [],
+            id: "categories",
+            name: "categories",
+            placeholder: "Categorias",
+            validation: function(value: CategoryDTO[]) {
+                return value.length > 0;
+            }, 
+            message: "Escolha ao menos uma categoria"
         }
 
-    })
+    });
+
+    useEffect(() => {
+        categoryService.findAllRequest()
+            .then(response => {
+                setCategories(response.data);
+            })
+    }, []);
 
     useEffect(() => {
 
@@ -112,6 +134,22 @@ export default function ProductForm() {
                                 <div className='dsc-form-error'>{formData.imgUrl.message}</div>
                             </div>
                             <div>
+                                <FormSelect
+                                    {...formData.categories}
+                                    className="dsc-form-control"
+                                    options={categories}
+                                    onChange={(obj: any) => {
+                                        const newFormData = forms.updateAndValidate(formData, "categories", obj);
+                                        setFormData(newFormData);
+                                    }}
+                                    onTurnDirty={handleTurnDirty}
+                                    isMulti
+                                    getOptionLabel={(obj: any) => obj.name}
+                                    getOptionValue={(obj: any) => obj.id}
+                                />
+                                 <div className='dsc-form-error'>{formData.categories.message}</div>
+                            </div>
+                            <div>
                                 <FormTextArea
                                     {...formData.description}
                                     className="dsc-form-control dsc-textarea"
@@ -121,8 +159,6 @@ export default function ProductForm() {
                                 <div className='dsc-form-error'>{formData.description.message}</div>
                             </div>
                         </div>
-                        
-                        
                         <div className="dsc-product-form-buttons">
                             <Link to={"/admin/products"}>
                                 <button type="reset" className="dsc-btn dsc-btn-white">Cancelar</button>
