@@ -8,7 +8,7 @@ import LoggedUser from '../LogedUser';
 import { Link, NavLink } from 'react-router-dom';
 
 export default function HeaderAdmin() {
-  const [user, setUser] = useState<UserDTO>();
+  const [, setUser] = useState<UserDTO>();
 
   useEffect(() => {
     userService.findMe()
